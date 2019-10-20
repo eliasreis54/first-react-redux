@@ -4,7 +4,7 @@ import ButtonDone from '../Buttons/button-done.js';
 class Table extends Component {
 
   renderData = () => {
-    return this.props.dataSource.map(item => {
+    return this.props.tasks.map(item => {
       return (
         <tr key={item}>
           <th>
@@ -21,15 +21,19 @@ class Table extends Component {
   render() {
     return (
       <table>
-        <tr>
-          <th>
-            Task
-          </th>
-          <th>
-            Action
-          </th>
-        </tr>
-        { this.renderData() }
+        <thead>
+          <tr>
+            <th>
+              Task
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          { this.renderData() }
+        </tbody>
       </table>
     );
   }

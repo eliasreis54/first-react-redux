@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 const todoListReducer = (state = INITIAL_STATE, action) => {
   const { payload, type } = action;
   const { tasks } = state;
+  console.log(tasks, payload);
   switch(type){
     case 'TODO_ADD':
       return { ...state, tasks: [...tasks, payload]};

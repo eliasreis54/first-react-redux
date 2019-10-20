@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
 import ButtonConfirm from '../Buttons/button-confirm.js';
 import Input from '../Inputs/Input.js';
-import Table from '../table/index.js';
-import { store } from '../store.js';
-import { addTask, removeTask } from '../actions/index';
+import Table from '../table/container.js';
 
 import './index.css';
 class App extends Component {
   state = {
-    task: '',
-    tasks: [],
+    task: ''
   }
-
-  componentDidMount() {
-    store.subscribe(() => {
-      this.setState({
-        task: '',
-        tasks: store.getState().todoListReducer.tasks,
-      })
-    });
-  };
 
   handleTask = event => this.setState({ task: event.target.value });
 
-  handleClickAdd = task => store.dispatch(addTask(this.state.task));
-
-  handleDone = task => store.dispatch(removeTask(this.state.task));
+  handleClickAdd = task => {
+    this.props.add(this.state.task);
+    this.setState({ task: '' });
+  }
+  handleDone = task => this.props.remove(task);
 
   render() {
     return(
@@ -35,7 +25,7 @@ class App extends Component {
           <ButtonConfirm onClick={this.handleClickAdd} />
         </div>
         <div> 
-          <Table dataSource={this.state.tasks} handleDone={this.handleDone} />
+          <Table handleDone={this.handleDone} />
         </div>
       </div>
     );
